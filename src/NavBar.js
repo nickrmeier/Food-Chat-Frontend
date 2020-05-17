@@ -19,7 +19,7 @@ const Styles = styled.div`
 export const NavigationBar = () => (
 	<Styles>
 		<Navbar expand='lg'>
-			<Navbar.Brand href='/'>Res Viewer</Navbar.Brand>
+			<Navbar.Brand href='/'>Food View</Navbar.Brand>
 			<Navbar.Toggle aria-controls='basic-navbar' />
 			<Navbar.Collapse id='basic-navbar-nav'>
 				<Nav className='ml-auto'>
