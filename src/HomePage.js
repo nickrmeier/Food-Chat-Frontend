@@ -28,14 +28,20 @@ export const Home = (props) => (
 							<Card className='text-center cities'>
 								<Card.Body>
 									<LinkContainer to={`/restaurants/Austin`}>
-										<Button value='Austin'>Austin</Button>
+										<Button name='Austin' onClick={props.handleClick}>
+											Austin
+										</Button>
 									</LinkContainer>
 								</Card.Body>
 							</Card>
 
 							<Card className='text-center cities'>
 								<Card.Body>
-									<Button value='NewYork'>New York</Button>
+									<LinkContainer to={`/restaurants/New York`}>
+										<Button name='NewYork' onClick={props.handleClick}>
+											New York
+										</Button>
+									</LinkContainer>
 								</Card.Body>
 							</Card>
 						</CardDeck>
