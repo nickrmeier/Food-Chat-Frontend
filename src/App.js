@@ -18,6 +18,9 @@ class App extends React.Component {
 		this.state = {
 			restaurants: '',
 			cityres: '',
+			title: '',
+			summary: '',
+			revisit: '',
 		};
 	}
 	componentDidMount() {
@@ -29,16 +32,41 @@ class App extends React.Component {
 	}
 
 	handleClick = (event) => {
-		const filteredRestaurants = this.state.restaurants.filter( restaurant => restaurant.city.split(" ").join("").includes(event.target.name))
+		const filteredRestaurants = this.state.restaurants.filter((restaurant) =>
+			restaurant.city.split(' ').join('').includes(event.target.name)
+		);
 		this.setState({ cityres: filteredRestaurants });
-		console.log(event.target.name)
-	}
+		console.log(event.target.name);
+	};
 
 	handleViewClick = (event) => {
-		const filteredRestaurants = this.state.cityres.filter( restaurant => restaurant.name.includes(event.target.name))	
-		this.setState({cityres: filteredRestaurants });
+		const filteredRestaurants = this.state.cityres.filter((restaurant) =>
+			restaurant.name.includes(event.target.name)
+		);
+		this.setState({ cityres: filteredRestaurants });
+	};
+	handleTitleChange = (event) => {
+		this.setState({ title: event.target.value })
+	};
+	handleSummaryChange = (event) => {
+		this.setState({ summary: event.target.value });
+	};
+	handleRevisitChange = (event) => {
+		this.setState({ revisit: event.target.value });
+	};
 
-	}
+	handlePostClick = () => {
+		const url = 'http://localhost:4000';
+		axios
+.post(`${url}/restaurant/post`, {
+				title: this.state.title,
+				summary: this.state.summary,
+				revisit: this.state.revisit,
+			})
+			.then((res) => {
+				console.log(res);
+			});
+	};
 
 	render() {
 		return (
@@ -66,8 +94,18 @@ class App extends React.Component {
 								exact
 								path='/restaurant/:name'
 								render={() => {
-									console.log(this.state.cityres)
-									return <RestaurantPage restaurant={this.state.cityres}/>
+									console.log(this.state.cityres);
+									return (
+										<RestaurantPage
+											handleTitleChange={this.handleTitleChange}
+											handleSummaryChange={this.handleSummaryChange}
+											handleRevisitChange={this.handleRevisitChange}
+											title={this.state.title}
+											summary={this.state.summary}
+											revisit={this.state.revisit}
+											restaurant={this.state.cityres}
+										/>
+									);
 								}}
 							/>
 							<Route

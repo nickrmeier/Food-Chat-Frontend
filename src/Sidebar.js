@@ -12,28 +12,40 @@ const Styles = styled.div`
 	}
 `;
 
-export const SideNav = () => (
-	<Styles>
-		<Nav className='side'>
-			<Form>
-				<Form.Group>
-					<Form.Label>Dish</Form.Label>
-					<Form.Control type='text' placeholder='Name of dish' />
-				</Form.Group>
-				<Form.Group>
-					<Form.Label>Description</Form.Label>
-					<Form.Control type='text' placeholder='Review the dish' />
-				</Form.Group>
-				<Form.Group>
-					<Form.Label>Revisit?</Form.Label>
-					<Form.Control as='select'>
-						<option>Please select one</option>
-						<option>Yes</option>
-						<option>No</option>
-					</Form.Control>
-				</Form.Group>
-				<Button>Create New Post</Button>
-			</Form>
-		</Nav>
-	</Styles>
-);
+export const SideNav = (props) => (
+					<Styles>
+						<Nav className='side'>
+							<Form>
+								<Form.Group>
+									<Form.Label>Dish</Form.Label>
+									<Form.Control
+										onChange={props.handleTitleChange}
+										type='text'
+										placeholder='Name of dish'
+										value={props.title}
+									/>
+								</Form.Group>
+								<Form.Group>
+									<Form.Label>Description</Form.Label>
+									<Form.Control
+										onChange={props.handleSummaryChange}
+										type='text'
+										placeholder='Review the dish'
+										value={props.summary}
+									/>
+								</Form.Group>
+								<Form.Group>
+									<Form.Label>Revisit?</Form.Label>
+									<Form.Control
+										as='select'
+										onChange={props.handleRevisitChange}
+										value={props.revisit}>
+										<option>Yes</option>
+										<option>No</option>
+									</Form.Control>
+								</Form.Group>
+								<Button onClick={props.handlePostClick}>Create New Post</Button>
+							</Form>
+						</Nav>
+					</Styles>
+				);

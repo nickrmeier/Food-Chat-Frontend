@@ -10,7 +10,6 @@ const Styles = styled.div`
 
 	.card {
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	
 	}
 `;
 
@@ -19,7 +18,7 @@ export const CityRes = (props) => {
 		return (
 			<Styles key={restaurant._id}>
 				<CardDeck>
-					<Card >
+					<Card style={{ width: '2px' }} >
 						<Card.Header>{restaurant.name}</Card.Header>
 						<Card.Img variant='top' src={restaurant.image}></Card.Img>
 
