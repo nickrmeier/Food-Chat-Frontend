@@ -32,40 +32,49 @@ const Styles = styled.div`
 `;
 
 export const Home = (props) => (
-	<Styles>
-		<CardDeck className='align-items-center'>
-			<Card className='text-center cities los-angeles'>
-				<Card.Body>
-					<LinkContainer to={`/restaurants/Los Angeles`}>
-						<Button
-							name={'LosAngeles'}
-							onClick={props.handleClick}
-							className='city'>
-							Los Angeles
-						</Button>
-					</LinkContainer>
-				</Card.Body>
-			</Card>
+					<Styles>
+						<CardDeck className='align-items-center'>
+							<Card className='text-center cities los-angeles'>
+								<Card.Body>
+									<LinkContainer to={`/restaurants/Los Angeles`}>
+										<Button
+											variant='outline-light'
+											name={'LosAngeles'}
+											onClick={props.handleClick}
+											className='city'>
+											Los Angeles
+										</Button>
+									</LinkContainer>
+								</Card.Body>
+							</Card>
 
-			<Card className='text-center cities austin'>
-				<Card.Body>
-					<LinkContainer to={`/restaurants/Austin`}>
-						<Button name='Austin' onClick={props.handleClick} className='city'>
-							Austin
-						</Button>
-					</LinkContainer>
-				</Card.Body>
-			</Card>
+							<Card className='text-center cities austin'>
+								<Card.Body>
+									<LinkContainer to={`/restaurants/Austin`}>
+										<Button
+											variant='outline-light'
+											name='Austin'
+											onClick={props.handleClick}
+											className='city'>
+											Austin
+										</Button>
+									</LinkContainer>
+								</Card.Body>
+							</Card>
 
-			<Card className='text-center cities new-york'>
-				<Card.Body>
-					<LinkContainer to={`/restaurants/New York`}>
-						<Button name='NewYork' onClick={props.handleClick} className='city'>
-							New York
-						</Button>
-					</LinkContainer>
-				</Card.Body>
-			</Card>
-		</CardDeck>
-	</Styles>
-);
+							<Card className='text-center cities new-york'>
+								<Card.Body>
+									<LinkContainer to={`/restaurants/New York`}>
+										<Button
+											variant='outline-light'
+											name='NewYork'
+											onClick={props.handleClick}
+											className='city'>
+											New York
+										</Button>
+									</LinkContainer>
+								</Card.Body>
+							</Card>
+						</CardDeck>
+					</Styles>
+				);
