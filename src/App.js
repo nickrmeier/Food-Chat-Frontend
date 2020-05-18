@@ -28,7 +28,9 @@ class App extends React.Component {
 	}
 
 	handleClick = (event) => {
-		const filteredRestaurants = this.state.restaurants.filter( restaurant => restaurant.name.split(" ").join("").includes(event.target.value))
+		console.log(event.target);
+		const filteredRestaurants = this.state.restaurants.filter( restaurant => restaurant.city.split(" ").join("").includes(event.target.value))
+		
 		this.setState({ cityres: filteredRestaurants });
 	}
 
@@ -44,7 +46,7 @@ class App extends React.Component {
 									return null;
 								}
 								console.log(this.state.restaurants);
-								return <Home restaurants={this.state.restaurants}/>
+								return <Home restaurants={this.state.restaurants} handleClick={this.state.handleClick}/>
 							} } />
 							<Route path='/restaurants/:city' render={(routerProps) => {
 								if(!this.state.restaurants || !this.state.cityres) {

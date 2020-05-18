@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Button, CardDeck } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Styles = styled.div`
@@ -12,25 +13,31 @@ const Styles = styled.div`
 `;
 
 export const Home = (props) => (
-	<Styles>
-		<CardDeck className='align-items-center'>
-			<Card className='text-center cities'>
-				<Card.Body>
-					<Button value="LosAngeles" href='/'>Los Angeles</Button>
-				</Card.Body>
-			</Card>
+					<Styles>
+						<CardDeck className='align-items-center'>
+							<Card className='text-center cities'>
+								<Card.Body>
+									<Link>
+										<Button value='LosAngeles' href='/' onClick={props.handleClick}>Los Angeles</Button>
+									</Link>
+								</Card.Body>
+							</Card>
 
-			<Card className='text-center cities'>
-				<Card.Body>
-					<Button value="Austin">Austin</Button>
-				</Card.Body>
-			</Card>
+							<Card className='text-center cities'>
+								<Card.Body>
+									<Link to={'/restaurants/Austin'}>
+										<Button value='Austin'>Austin</Button>
+									</Link>
+								</Card.Body>
+							</Card>
 
-			<Card className='text-center cities'>
-				<Card.Body>
-					<Button value="NewYork">New York</Button>
-				</Card.Body>
-			</Card>
-		</CardDeck>
-	</Styles>
-);
+							<Card className='text-center cities'>
+								<Card.Body>
+									<Link>
+										<Button value='NewYork'>New York</Button>
+									</Link>
+								</Card.Body>
+							</Card>
+						</CardDeck>
+					</Styles>
+				);
