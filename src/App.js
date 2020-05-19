@@ -25,11 +25,12 @@ class App extends React.Component {
 	}
 	componentDidMount() {
 		const url = 'http://localhost:4000';
-		axios.get(`${url}/restaurants`).then((res) => {
+		axios.get(`${url}/api/restaurants`).then((res) => {
 			const rest = res.data;
 			this.setState({ restaurants: rest });
 		});
 	}
+	
 
 	handleClick = (event) => {
 		const filteredRestaurants = this.state.restaurants.filter((restaurant) =>
