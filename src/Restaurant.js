@@ -44,18 +44,22 @@ class RestaurantPage extends React.Component {
 		return (
 			<>
 				<Card>
-					<Card.Header>{this.props.restaurant[0].name}</Card.Header>
+					<Card.Header className='restaurant-name'>
+						{this.props.restaurant[0].name}
+					</Card.Header>
 				</Card>{' '}
-				<SideNav
-					handleTitleChange={this.handleTitleChange}
-					handleSummaryChange={this.handleSummaryChange}
-					handleRevisitChange={this.handleRevisitChange}
-					handlePostClick={this.handlePostClick}
-					revisit={this.state.revisit}
-					title={this.state.title}
-					summary={this.state.summary}
-				/>
-				<AllPosts restaurant={this.props.restaurant[0]}/>
+				<div className='restaurant-review'>
+					<SideNav
+						handleTitleChange={this.handleTitleChange}
+						handleSummaryChange={this.handleSummaryChange}
+						handleRevisitChange={this.handleRevisitChange}
+						handlePostClick={this.handlePostClick}
+						revisit={this.state.revisit}
+						title={this.state.title}
+						summary={this.state.summary}
+					/>
+					<AllPosts restaurant={this.props.restaurant[0]} />
+				</div>
 			</>
 		);
 	}

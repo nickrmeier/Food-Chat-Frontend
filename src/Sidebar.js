@@ -1,14 +1,15 @@
 import React from 'react';
-import { Nav, Form, Row, Col, Button } from 'react-bootstrap';
+import { Nav, Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Styles = styled.div`
 	.side {
 		background-color: rgba(80, 137, 154, 0.934);
-		width: 250px;
-		height: 100vh;
-		padding-left: 25px;
+		height: 100%;
+		padding-left: 40px;
 		padding-top: 20px;
+		overflow: auto;
+		margin-top: 1rem;
 	}
 `;
 

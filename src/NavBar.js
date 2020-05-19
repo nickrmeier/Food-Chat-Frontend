@@ -8,6 +8,12 @@ const Styles = styled.div`
 		background: #070000;
 		background: -webkit-linear-gradient(to right, #070000, #4c0001, #070000);
 		background: linear-gradient(to right, #070000, #4c0001, #070000);
+
+		position: relative;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
 	}
 	a,
 	.navbar-brand,
@@ -20,12 +26,16 @@ const Styles = styled.div`
 	.logo {
 		width: 10%;
 	}
+	.title {
+		font-family: 'Comic Sans MS', cursive, sans-serif;
+		font-size: 28px;
+	}
 `;
 
 export const NavigationBar = () => (
 					<Styles>
 						<Navbar expand='lg'>
-							<Navbar.Brand href='/'>
+							<Navbar.Brand href='/' className='title'>
 								<img
 									src='https://i.imgur.com/VSZL4JF.png'
 									alt='logo'

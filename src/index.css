@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.restaurant-review{
+ display: grid;
+ grid-gap: 1rem;
+grid-template-columns: 1fr 3fr;
+margin-top: 10px;
+}
+.restaurant-name {
+  text-align: center;
+ font-size: 25px;
+ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ font-weight: bold;
+}
+.button {
+  width: 10%;
+  display: inline-block;
+}
+.post {
+margin-top: 1rem;
+}
