@@ -18,7 +18,7 @@ export const CityRes = (props) => {
 		return (
 			<Styles key={restaurant._id}>
 				<CardDeck>
-					<Card style={{ width: '2px' }} >
+					<Card >
 						<Card.Header>{restaurant.name}</Card.Header>
 						<Card.Img variant='top' src={restaurant.image}></Card.Img>
 

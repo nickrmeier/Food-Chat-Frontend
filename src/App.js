@@ -9,7 +9,7 @@ import { NavigationBar } from './NavBar';
 import { Home } from './HomePage';
 import { Layout } from './Layout';
 import { CityRes } from './CityRes';
-import { RestaurantPage } from './Restaurant';
+import  RestaurantPage  from './Restaurant';
 import axios from 'axios';
 
 class App extends React.Component {
@@ -45,29 +45,7 @@ class App extends React.Component {
 		);
 		this.setState({ cityres: filteredRestaurants });
 	};
-	handleTitleChange = (event) => {
-		this.setState({ title: event.target.value })
-	};
-	handleSummaryChange = (event) => {
-		this.setState({ summary: event.target.value });
-	};
-	handleRevisitChange = (event) => {
-		this.setState({ revisit: event.target.value });
-	};
-
-	handlePostClick = () => {
-		const url = 'http://localhost:4000';
-		axios
-.post(`${url}/restaurant/post`, {
-				title: this.state.title,
-				summary: this.state.summary,
-				revisit: this.state.revisit,
-			})
-			.then((res) => {
-				console.log(res);
-			});
-	};
-
+	
 	render() {
 		return (
 			<React.Fragment>
@@ -93,10 +71,12 @@ class App extends React.Component {
 							<Route
 								exact
 								path='/restaurant/:name'
-								render={() => {
+								render={(routerProps) => {
 									console.log(this.state.cityres);
+									console.log(routerProps);
 									return (
 										<RestaurantPage
+											routerProps={routerProps}
 											handleTitleChange={this.handleTitleChange}
 											handleSummaryChange={this.handleSummaryChange}
 											handleRevisitChange={this.handleRevisitChange}
