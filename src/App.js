@@ -25,8 +25,8 @@ class App extends React.Component {
 		};
 	}
 	componentDidMount() {
-		const url = 'http://localhost:4000';
-		axios.get(`${url}/api/restaurants`).then((res) => {
+		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/restaurants';
+		axios.get(`${url}`).then((res) => {
 			const rest = res.data;
 			this.setState({ restaurants: rest });
 		});

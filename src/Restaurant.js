@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap';
 import { SideNav } from './Sidebar';
 import { AllPosts } from './Posts';
 import styled from 'styled-components';
+import { withRouter } from 'react-router';
 import axios from 'axios';
 
 const Styles = styled.div`
@@ -26,19 +27,30 @@ class RestaurantPage extends React.Component {
 			title: '',
 			summary: '',
 			revisit: '',
-			newTitle: '',
-			newSummary: '',
-			newRevisit: '',
 			show: false,
 			posts: '',
+			redirect: false
 		};
 	}
 
+	handleRedirect = () => {
+		this.setState({ redirect: true })
+	}
+
 	componentDidMount() {
-		const url = 'http://localhost:4000';
-		axios.get(`${url}/api/post/${this.props.restaurant._id}`).then((res) => {
+		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
+		axios.get(`${url}/${this.props.restaurant._id}`).then((res) => {
 			const allPosts = res.data;
 			this.setState({ posts: allPosts });
+			console.log(allPosts);
+		});
+	}
+
+	componentDidUpdate() {
+		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
+		axios.get(`${url}/${this.props.restaurant._id}`).then((res) => {
+			const allPosts = res.data;
+			this.setState({ posts: allPosts, redirect: false });
 			console.log(allPosts);
 		});
 	}
@@ -50,66 +62,45 @@ class RestaurantPage extends React.Component {
 	handleClose = () => {
 		this.setState({ show: false });
 	};
-	handleTitleChange = (event) => {
-		if (event.target.name) {
-			this.setState({ newTitle: event.target.value })
-		} else {
-			this.setState({ title: event.target.value });
-		}
-	};
-	handleSummaryChange = (event) => {
-		if (event.target.name) {
-			this.setState({ newSummary: event.target.value });
-		} else {
-			this.setState({ summary: event.target.value });
-		}
-	};
-	handleRevisitChange = (event) => {
-		if (event.target.name) {
-			this.setState({ newRevisit: event.target.value });
-		} else {
-			this.setState({ revisit: event.target.value });
-		}
-	};
+	
 
-	handlePostClick = (props) => {
-		const url = 'http://localhost:4000';
+	handlePostClick = (event, data) => {
+		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
 		axios
 			.post(
-				`${url}/api/post/${this.props.restaurant._id}`,
-				{
-					title: this.state.title,
-					summary: this.state.summary,
-					revisit: this.state.revisit,
-				}
+				`${url}/${this.props.restaurant._id}`,
+				{ ...data }
 			)
 			.then((res) => {
 				console.log(res);
+				this.handleRedirect();
 			});
-		window.location.reload(false)
+			// this.props.history.push(`/restaurant/${this.props.restaurant.name}`);
 	};
 
-	handleEditClick = (event) => {
-		const url = 'http://localhost:4000/api/post';
+	handleEditClick = (event, data) => {
+		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
 		axios
-			.put(`${url}/${event.target.id}`, {
-				title: this.state.newTitle,
-				summary: this.state.newSummary,
-				revisit: this.state.newRevisit,
-			})
+			.put(`${url}/${event.target.id}`, { ...data })
 			.then((res) => {
 				console.log(res);
+				this.handleRedirect();
 			});
 		this.setState({ show: false })
+		// this.props.history.push(`/restaurant/${this.props.restaurant.name}`);
 	};
 
 	handleDeleteClick = (event) => {
-		const url = 'http://localhost:4000/api/post';
-		axios.delete(`${url}/${event.target.id}`).then(res => { console.log(res) })
+		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
+		axios.delete(`${url}/${event.target.id}`).then(res => { 
+			console.log(res); 
+			this.handleRedirect();
+		})
 		this.setState({ show: false })
+		// this.props.history.push(`/restaurant/${this.props.restaurant.name}`);
 	}
 
-	render(props) {
+	render() {
 		if (!this.state.posts) {
 			return null
 		}
@@ -121,36 +112,29 @@ class RestaurantPage extends React.Component {
 							{this.props.restaurant.name}
 						</Card.Header>
 					</Card>{' '}
-					<div className='restaurant-review'>
+					{/* <div className='restaurant-review'> */}
+						{this.state.posts.map((post, index) => {
+							return (
+								<AllPosts
+									post={post}
+									restaurant={this.props.restaurant}
+									show={this.state.show}
+									handleEditClick={this.handleEditClick}
+									handleDeleteClick={this.handleDeleteClick}
+								/>
+							);
+						})}
 						<SideNav
-							handleTitleChange={this.handleTitleChange}
-							handleSummaryChange={this.handleSummaryChange}
-							handleRevisitChange={this.handleRevisitChange}
 							handlePostClick={this.handlePostClick}
 							revisit={this.state.revisit}
 							title={this.state.title}
 							summary={this.state.summary}
 						/>
-						<AllPosts
-							posts={this.state.posts}
-							restaurant={this.props.restaurant[0]}
-							show={this.state.show}
-							handleShow={this.handleShow}
-							handleClose={this.handleClose}
-							revisit={this.state.newRevisit}
-							title={this.state.newTitle}
-							summary={this.state.newSummary}
-							handleTitleChange={this.handleTitleChange}
-							handleSummaryChange={this.handleSummaryChange}
-							handleRevisitChange={this.handleRevisitChange}
-							handleEditClick={this.handleEditClick}
-							handleDeleteClick={this.handleDeleteClick}
-						/>
-					</div>
+					
 				</Styles>
 			</>
 		);
 	}
 }
 
-export default RestaurantPage;
+export default withRouter(RestaurantPage);

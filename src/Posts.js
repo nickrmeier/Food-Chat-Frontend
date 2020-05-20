@@ -1,66 +1,92 @@
 import React from 'react';
 import { Card, Button, Modal, Form } from 'react-bootstrap';
+import styled from 'styled-components';
 
-export const AllPosts = (props) => {
-	console.log(props.posts)
-	const list = props.posts.map((post) => {
+
+const Styles = styled.div``;
+
+export class AllPosts extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			title: this.props.post.title,
+			summary: this.props.post.summary,
+			revisit: this.props.post.revisit,
+			show: false,
+		}
+	}
+	handleChange = (evt) => {
+		this.setState({ [evt.target.name]: evt.target.value });
+	};
+	handleShow = () => {
+		this.setState({ show: true });
+	};
+
+	handleClose = () => {
+		this.setState({ show: false });
+	};
+
+	
+
+	render() {
 		return (
-			<div key={post._id}>
+			<div key={this.props.post._id}>
 				<Card className='post'>
-					<Modal show={props.show} onHide={props.handleClose}>
+					<Modal show={this.state.show} onHide={this.handleClose}>
 						<Modal.Header closeButton>Edit Post</Modal.Header>
 						<Modal.Body>
 							<Form>
 								<Form.Group>
 									<Form.Label>Dish</Form.Label>
 									<Form.Control
-										name='dish'
-										onChange={() => {
-											props.handleTitleChange();
-											console.log(post._id);
-										}}
+										name='title'
+										onChange={this.handleChange}
 										type='text'
 										placeholder='Name of dish'
-										value={post.title}
+										value={this.state.title}
 									/>
 								</Form.Group>
 								<Form.Group>
 									<Form.Label>Description</Form.Label>
 									<Form.Control
-										name='dish'
-										onChange={props.handleSummaryChange}
+										name='summary'
+										onChange={this.handleChange}
 										type='text'
 										placeholder='Review the dish'
-										value={post.summary}
+										value={this.state.summary}
 									/>
 								</Form.Group>
 								<Form.Group>
 									<Form.Label>Revisit?</Form.Label>
 									<Form.Control
 										as='select'
-										name='dish'
-										onChange={props.handleRevisitChange}
-										value={post.revisit}>
+										name='revisit'
+										onChange={this.handleChange}
+										value={this.state.revisit}>
 										<option>Please select one</option>
 										<option>Yes</option>
 										<option>No</option>
 									</Form.Control>
 								</Form.Group>
 								<Button
-									id={post._id}
+									id={this.props.post._id}
 									onClick={(evt) => {
-										props.handleEditClick(evt);
-										console.log(post._id);
+										const data = {
+											title: this.state.title,
+											summary: this.state.summary,
+											revisit: this.state.revisit
+										}
+										this.props.handleEditClick(evt, data);
 									}}>
 									Submit
 								</Button>
 							</Form>
 						</Modal.Body>
 					</Modal>
-					<Card.Header>Dish: {post.title}</Card.Header>
+					<Card.Header>Dish: {this.props.post.title}</Card.Header>
 					<Card.Body>
-						<Card.Text>Description: {post.summary}</Card.Text>
-						<Card.Text>Revisit: {post.revisit}</Card.Text>
+						<Card.Text>Description: {this.props.post.summary}</Card.Text>
+						<Card.Text>Revisit: {this.props.post.revisit}</Card.Text>
 					</Card.Body>
 					<div className='group'>
 						<Button
@@ -68,8 +94,8 @@ export const AllPosts = (props) => {
 							size='sm'
 							className='button'
 							onClick={() => {
-								props.handleShow();
-								console.log(post._id);
+								this.handleShow();
+								console.log(this.props.post._id);
 							}}>
 							Edit
 						</Button>
@@ -77,14 +103,13 @@ export const AllPosts = (props) => {
 							variant='outline-info'
 							size='sm'
 							className='button'
-							id={post._id}
-							onClick={props.handleDeleteClick}>
+							id={this.props.post._id}
+							onClick={this.props.handleDeleteClick}>
 							Delete
 						</Button>
 					</div>
 				</Card>
 			</div>
 		);
-	});
-	return <div>{list}</div>;
-};
+	}
+} 

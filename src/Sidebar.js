@@ -36,41 +36,66 @@ const Styles = styled.div`
 	}
 `;
 
-export const SideNav = (props) => (
-					<Styles>
-						<Nav className='side'>
-							<Form>
-								<Form.Group>
-									<Form.Label>Dish</Form.Label>
-									<Form.Control
-										onChange={props.handleTitleChange}
-										type='text'
-										placeholder='Name of dish'
-										value={props.title}
-									/>
-								</Form.Group>
-								<Form.Group>
-									<Form.Label>Description</Form.Label>
-									<Form.Control
-										onChange={props.handleSummaryChange}
-										type='text'
-										placeholder='Review the dish'
-										value={props.summary}
-									/>
-								</Form.Group>
-								<Form.Group>
-									<Form.Label>Revisit?</Form.Label>
-									<Form.Control
-										as='select'
-										onChange={props.handleRevisitChange}
-										value={props.revisit}>
-										<option>Please Select One</option>
-										<option>Yes</option>
-										<option>No</option>
-									</Form.Control>
-								</Form.Group>
-				<Button onClick={props.handlePostClick} className="button">Create New Post</Button>
-							</Form>
-						</Nav>
-					</Styles>
-				);
+export class SideNav extends React.Component {
+	constructor(props){
+		super(props) 
+		this.state = {
+			title: '',
+			summary: '',
+			revisit: true
+		}
+	}
+	handleChange = (evt) => {
+		this.setState({ [evt.target.id]: evt.target.value });
+	};
+	render() {
+		return (
+			<Styles>
+				<Nav className='side'>
+					<Form>
+						<Form.Group>
+							<Form.Label>Dish</Form.Label>
+							<Form.Control
+								onChange={this.handleChange}
+								type='text'
+								placeholder='Name of dish'
+								value={this.state.title}
+								id='title'
+							/>
+						</Form.Group>
+						<Form.Group>
+							<Form.Label>Description</Form.Label>
+							<Form.Control
+								onChange={this.handleChange}
+								type='text'
+								placeholder='Review the dish'
+								value={this.state.summary}
+								id='summary'
+							/>
+						</Form.Group>
+						<Form.Group>
+							<Form.Label>Revisit?</Form.Label>
+							<Form.Control
+								as='select'
+								onChange={this.handleChange}
+								value={this.state.revisit}
+								id='revisit'
+								>
+								<option>Please Select One</option>
+								<option>Yes</option>
+								<option>No</option>
+							</Form.Control>
+						</Form.Group>
+						<Button
+							onClick={(event) => {
+								this.props.handlePostClick(event, this.state);
+							}}
+							className='button'>
+							Create New Post
+						</Button>
+					</Form>
+				</Nav>
+			</Styles>
+		);
+	}
+} 
