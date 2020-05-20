@@ -112,7 +112,7 @@ class RestaurantPage extends React.Component {
 							{this.props.restaurant.name}
 						</Card.Header>
 					</Card>{' '}
-					{/* <div className='restaurant-review'> */}
+					{/* move side nav here if you can't get them to go side by side*/}
 						{this.state.posts.map((post, index) => {
 							return (
 								<AllPosts
