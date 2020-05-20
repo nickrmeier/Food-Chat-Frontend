@@ -74,9 +74,9 @@ class RestaurantPage extends React.Component {
 	};
 
 	handleEditClick = (event) => {
-		const url = 'http://localhost:4000/restaurant/post';
+		const url = 'http://localhost:4000/api/post';
 		axios
-			.put(`${url}/${event.target.name}`, {
+			.put(`${url}/${event.target.id}`, {
 				title: this.state.newTitle,
 				summary: this.state.newSummary,
 				revisit: this.state.newRevisit,
@@ -88,12 +88,15 @@ class RestaurantPage extends React.Component {
 	};
 
 	handleDeleteClick =(event) => {
-	const url = 'http://localhost:4000/restaurant/post';
-	axios.delete(`${url}/${event.target.name}`).then(res => {console.log(res)})
+	const url = 'http://localhost:4000/api/post';
+	axios.delete(`${url}/${event.target.id}`).then(res => {console.log(res)})
 	this.setState({show: false})
 	}
 
 	render(props) {
+		if(!this.state.posts){
+			return null
+		}
 		return (
 			<>
 				<Card>
