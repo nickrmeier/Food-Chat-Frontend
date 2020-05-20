@@ -62,7 +62,7 @@ export const AllPosts = (props) => {
 						<Card.Text>Description: {post.summary}</Card.Text>
 						<Card.Text>Revisit: {post.revisit}</Card.Text>
 					</Card.Body>
-					<div role='group'>
+					<div className='group'>
 						<Button
 							variant='outline-info'
 							size='sm'

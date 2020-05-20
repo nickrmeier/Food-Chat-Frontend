@@ -41,6 +41,7 @@ export const SideNav = (props) => (
 										as='select'
 										onChange={props.handleRevisitChange}
 										value={props.revisit}>
+										<option>Please Select One</option>
 										<option>Yes</option>
 										<option>No</option>
 									</Form.Control>

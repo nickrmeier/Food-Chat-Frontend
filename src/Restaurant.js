@@ -21,7 +21,7 @@ class RestaurantPage extends React.Component {
 
 	componentDidMount() {
 		const url = 'http://localhost:4000';
-		axios.get(`${url}/api/post/${this.props.restaurant[0]._id}`).then((res) => {
+		axios.get(`${url}/api/post/${this.props.restaurant._id}`).then((res) => {
 			const allPosts = res.data;
 			this.setState({ posts: allPosts });
 			console.log(allPosts);
@@ -61,7 +61,7 @@ class RestaurantPage extends React.Component {
 		const url = 'http://localhost:4000';
 		axios
 			.post(
-				`${url}/api/post/${this.props.restaurant[0]._id}`,
+				`${url}/api/post/${this.props.restaurant._id}`,
 				{
 					title: this.state.title,
 					summary: this.state.summary,
@@ -71,6 +71,7 @@ class RestaurantPage extends React.Component {
 			.then((res) => {
 				console.log(res);
 			});
+			window.location.reload(false)
 	};
 
 	handleEditClick = (event) => {
@@ -101,7 +102,7 @@ class RestaurantPage extends React.Component {
 			<>
 				<Card>
 					<Card.Header className='restaurant-name'>
-						{this.props.restaurant[0].name}
+						{this.props.restaurant.name}
 					</Card.Header>
 				</Card>{' '}
 				<div className='restaurant-review'>

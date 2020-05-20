@@ -17,7 +17,8 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			restaurants: '',
-			cityres: '',
+			cityRestaurants: '',
+			restaurant: '',
 			title: '',
 			summary: '',
 			revisit: '',
@@ -36,15 +37,15 @@ class App extends React.Component {
 		const filteredRestaurants = this.state.restaurants.filter((restaurant) =>
 			restaurant.city.split(' ').join('').includes(event.target.name)
 		);
-		this.setState({ cityres: filteredRestaurants });
+		this.setState({ cityRestaurants: filteredRestaurants });
 		console.log(event.target.name);
 	};
 
 	handleViewClick = (event) => {
-		const filteredRestaurants = this.state.cityres.filter((restaurant) =>
+		const filteredRestaurants = this.state.cityRestaurants.find((restaurant) =>
 			restaurant.name.includes(event.target.name)
 		);
-		this.setState({ cityres: filteredRestaurants });
+		this.setState({ restaurant: filteredRestaurants });
 	};
 	
 	render() {
@@ -73,8 +74,7 @@ class App extends React.Component {
 								exact
 								path='/restaurant/:name'
 								render={(routerProps) => {
-									console.log(this.state.cityres);
-									console.log(routerProps);
+									console.log(this.state.cityRestaurants);
 									return (
 										<RestaurantPage
 											routerProps={routerProps}
@@ -84,7 +84,7 @@ class App extends React.Component {
 											title={this.state.title}
 											summary={this.state.summary}
 											revisit={this.state.revisit}
-											restaurant={this.state.cityres}
+											restaurant={this.state.restaurant}
 										/>
 									);
 								}}
@@ -93,13 +93,13 @@ class App extends React.Component {
 								exact
 								path='/restaurants/:city'
 								render={(routerProps) => {
-									if (!this.state.restaurants || !this.state.cityres) {
+									if (!this.state.restaurants || !this.state.cityRestaurants) {
 										return null;
 									}
-									console.log(this.state.cityres);
+									console.log(this.state.cityRestaurants);
 									return (
 										<CityRes
-											cityRestaurants={this.state.cityres}
+											cityRestaurants={this.state.cityRestaurants}
 											handleViewClick={this.handleViewClick}
 											match={routerProps.match}
 										/>
