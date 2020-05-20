@@ -6,13 +6,19 @@ import styled from 'styled-components';
 const Styles = styled.div`
 	.card-deck {
 		margin-top: 200px;
+		@media (max-width: 576px) { 
+			margin-top: 15px;
+		 }	
 	}
 	.cities {
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 		height: 180px;
+		font-family: 'Quicksand', sans-serif;
 	}
 	.city {
-		margin-top: 50px;
+		margin-top: 45px;
+		height: 50px;
+		font-size: 25px;
 	}
 	.new-york {
 		background-image: url('https://i.imgur.com/vnsmHUx.jpg');

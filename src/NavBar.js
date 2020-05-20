@@ -8,27 +8,35 @@ const Styles = styled.div`
 		background: #070000;
 		background: -webkit-linear-gradient(to right, #070000, #4c0001, #070000);
 		background: linear-gradient(to right, #070000, #4c0001, #070000);
-
-		position: relative;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 1;
+		font-family: 'Quicksand', sans-serif;
+		font-size: 18px;
+		@media (max-width: 576px) 
+		{ 
+		height: 90px;
+		}
 	}
 	a,
 	.navbar-brand,
 	.navbar-nav .nav-link {
+		font-size: 24px;
 		color: #bbb;
 		&:hover {
 			color: white;
 		}
+		@media (max-width: 576px) 
+		{ 
+		font-size: 30px;
+		}
 	}
 	.logo {
-		width: 10%;
+		width: 11%;
+		@media (max-width: 576px) 
+		{ 
+		width: 20%;
+		}
 	}
-	.title {
-		font-family: 'Comic Sans MS', cursive, sans-serif;
-		font-size: 28px;
+	.smallNav {
+		float: right;
 	}
 `;
 
