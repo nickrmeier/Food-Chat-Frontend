@@ -18,7 +18,7 @@ The technologies for the front-end of this project include:
 
 ### Getting Started
 
-To get started, navigate over to () where three cities will appear. Click on whichever one you'd like and select a restaurant from that city's top 10. Then start creating posts!
+To get started, navigate over to https://food-chat323.herokuapp.com/ where three cities will appear. Click on whichever one you'd like and select a restaurant from that city's top 10. Then start creating posts!
 
 ### Installation Instructions 
 
