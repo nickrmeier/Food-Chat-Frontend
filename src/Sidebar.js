@@ -10,40 +10,43 @@ const Styles = styled.div`
 		height: 100vh;
 		padding-left: 25px;
 		padding-top: 20px;
-			@media (max-width: 768px) 
-			{ 
+		@media (max-width: 768px) {
 			width: 100%;
 			height: 350px;
-			}
+		}
 	}
 
 	.form-control {
-		@media (max-width: 576px) { 
-		width: 290px;
-		}	
+		@media (max-width: 576px) {
+			width: 290px;
+		}
 	}
 
 	.button {
 		width: 100%;
 		background-color: rgba(66, 170, 245);
-		font-size: 20px;	
+		font-size: 20px;
 	}
 	.button:hover {
-		  background-color: rgba(34, 72, 99);
+		background-color: rgba(34, 72, 99);
 	}
 	.button:active {
 		background-color: rgba(34, 72, 99);
 	}
+
+	@media (max-width: 768px) {
+		order: -1;
+	}
 `;
 
 export class SideNav extends React.Component {
-	constructor(props){
-		super(props) 
+	constructor(props) {
+		super(props);
 		this.state = {
 			title: '',
 			summary: '',
-			revisit: true
-		}
+			revisit: true,
+		};
 	}
 	handleChange = (evt) => {
 		this.setState({ [evt.target.id]: evt.target.value });
@@ -79,8 +82,7 @@ export class SideNav extends React.Component {
 								as='select'
 								onChange={this.handleChange}
 								value={this.state.revisit}
-								id='revisit'
-								>
+								id='revisit'>
 								<option>Please Select One</option>
 								<option>Yes</option>
 								<option>No</option>
@@ -98,4 +100,4 @@ export class SideNav extends React.Component {
 			</Styles>
 		);
 	}
-} 
+}

@@ -7,30 +7,36 @@ import { withRouter } from 'react-router';
 import axios from 'axios';
 
 const Styles = styled.div`
-
 	font-family: 'Quicksand', sans-serif;
 
 	.restaurant-name {
 		font-family: 'Quicksand', sans-serif;
-		font-size: 32px;	
+		font-size: 32px;
 	}
 
 	.restaurant-address {
 		font-family: 'Quicksand', sans-serif;
-		text-align: center;	
+		text-align: center;
 		font-size: 21px;
 	}
 
 	.card {
 		margin-top: 25px;
 		font-size: 27px;
-		@media (max-width: 768px) { 
-				margin-top: 15px;
-				margin-bottom: 15px;
-				font-size: 20px;
-				}
+		@media (max-width: 768px) {
+			margin-top: 15px;
+			margin-bottom: 15px;
+			font-size: 20px;
+		}
 		background-color: rgba(247, 255, 253);
-	}	
+	}
+
+	.content {
+		@media (max-width: 768px) {
+			display: flex; 
+			flex-direction: column;
+		}
+	}
 `;
 
 class RestaurantPage extends React.Component {
@@ -42,13 +48,13 @@ class RestaurantPage extends React.Component {
 			revisit: '',
 			show: false,
 			posts: '',
-			redirect: false
+			redirect: false,
 		};
 	}
 
 	handleRedirect = () => {
-		this.setState({ redirect: true })
-	}
+		this.setState({ redirect: true });
+	};
 
 	componentDidMount() {
 		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
@@ -64,7 +70,6 @@ class RestaurantPage extends React.Component {
 		axios.get(`${url}/${this.props.restaurant._id}`).then((res) => {
 			const allPosts = res.data;
 			this.setState({ posts: allPosts, redirect: false });
-			console.log(allPosts);
 		});
 	}
 
@@ -75,47 +80,41 @@ class RestaurantPage extends React.Component {
 	handleClose = () => {
 		this.setState({ show: false });
 	};
-	
 
 	handlePostClick = (event, data) => {
 		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
 		axios
-			.post(
-				`${url}/${this.props.restaurant._id}`,
-				{ ...data }
-			)
+			.post(`${url}/${this.props.restaurant._id}`, { ...data })
 			.then((res) => {
 				console.log(res);
 				this.handleRedirect();
 			});
-			// this.props.history.push(`/restaurant/${this.props.restaurant.name}`);
+		// this.props.history.push(`/restaurant/${this.props.restaurant.name}`);
 	};
 
 	handleEditClick = (event, data) => {
 		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
-		axios
-			.put(`${url}/${event.target.id}`, { ...data })
-			.then((res) => {
-				console.log(res);
-				this.handleRedirect();
-			});
-		this.setState({ show: false })
+		axios.put(`${url}/${event.target.id}`, { ...data }).then((res) => {
+			console.log(res);
+			this.handleRedirect();
+		});
+		this.setState({ show: false });
 		// this.props.history.push(`/restaurant/${this.props.restaurant.name}`);
 	};
 
 	handleDeleteClick = (event) => {
 		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
-		axios.delete(`${url}/${event.target.id}`).then(res => { 
-			console.log(res); 
+		axios.delete(`${url}/${event.target.id}`).then((res) => {
+			console.log(res);
 			this.handleRedirect();
-		})
-		this.setState({ show: false })
+		});
+		this.setState({ show: false });
 		// this.props.history.push(`/restaurant/${this.props.restaurant.name}`);
-	}
+	};
 
 	render() {
 		if (!this.state.posts) {
-			return null
+			return null;
 		}
 		return (
 			<>
@@ -127,10 +126,9 @@ class RestaurantPage extends React.Component {
 						<Card.Header className='restaurant-address'>
 							{this.props.restaurant.address}
 						</Card.Header>
-
-
 					</Card>{' '}
 					{/* move side nav here if you can't get them to go side by side*/}
+					<div className='content' >
 						{this.state.posts.map((post, index) => {
 							return (
 								<AllPosts
@@ -142,13 +140,15 @@ class RestaurantPage extends React.Component {
 								/>
 							);
 						})}
+
 						<SideNav
+							
 							handlePostClick={this.handlePostClick}
 							revisit={this.state.revisit}
 							title={this.state.title}
 							summary={this.state.summary}
 						/>
-					
+					</div>
 				</Styles>
 			</>
 		);
