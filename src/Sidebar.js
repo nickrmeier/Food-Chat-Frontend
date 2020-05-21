@@ -10,7 +10,7 @@ const Styles = styled.div`
 		height: 100vh;
 		padding-left: 25px;
 		padding-top: 20px;
-			@media (max-width: 576px) 
+			@media (max-width: 768px) 
 			{ 
 			width: 100%;
 			height: 350px;

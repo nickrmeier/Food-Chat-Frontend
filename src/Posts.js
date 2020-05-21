@@ -2,8 +2,42 @@ import React from 'react';
 import { Card, Button, Modal, Form } from 'react-bootstrap';
 import styled from 'styled-components';
 
+const Styles = styled.div`
 
-const Styles = styled.div``;
+	.post {
+		width: 830px;
+		float: right;
+		@media (max-width: 1200px) 
+			{ 
+			width: 650px;
+			}
+		@media (max-width: 991px) 
+			{ 
+			width: 415px;
+			}	
+		@media (max-width: 768px) 
+			{ 
+			width: 100%;
+			height: 250px;
+			}	
+	}
+
+	.button {
+		width: 125px;
+		margin: 15px;
+				
+		@media (max-width: 1200px) 
+			{ 
+			width: 125px;
+			}
+
+		@media (max-width: 991px) 
+			{ 
+			width: 125px;
+			margin: 23px;
+			}	
+	}
+`;
 
 export class AllPosts extends React.Component {
 	constructor(props){
@@ -27,10 +61,10 @@ export class AllPosts extends React.Component {
 	};
 
 	
-
 	render() {
 		return (
 			<div key={this.props.post._id}>
+				<Styles>
 				<Card className='post'>
 					<Modal show={this.state.show} onHide={this.handleClose}>
 						<Modal.Header closeButton>Edit Post</Modal.Header>
@@ -109,6 +143,7 @@ export class AllPosts extends React.Component {
 						</Button>
 					</div>
 				</Card>
+				</Styles>					
 			</div>
 		);
 	}

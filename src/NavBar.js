@@ -10,10 +10,6 @@ const Styles = styled.div`
 		background: linear-gradient(to right, #070000, #4c0001, #070000);
 		font-family: 'Quicksand', sans-serif;
 		font-size: 18px;
-		@media (max-width: 576px) 
-		{ 
-		height: 90px;
-		}
 	}
 	a,
 	.navbar-brand,
@@ -30,12 +26,15 @@ const Styles = styled.div`
 	}
 	.logo {
 		width: 11%;
-		@media (max-width: 576px) 
+		@media (max-width: 768px) 
 		{ 
-		width: 20%;
+		display: none;
 		}
 	}
 	.smallNav {
+		float: right;
+	}
+	.ml-auto {
 		float: right;
 	}
 `;

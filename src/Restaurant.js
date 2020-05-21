@@ -10,12 +10,25 @@ const Styles = styled.div`
 
 	font-family: 'Quicksand', sans-serif;
 
+	.restaurant-name {
+		font-family: 'Quicksand', sans-serif;
+		font-size: 32px;	
+	}
+
+	.restaurant-address {
+		font-family: 'Quicksand', sans-serif;
+		text-align: center;	
+		font-size: 21px;
+	}
+
 	.card {
 		margin-top: 25px;
-		@media (max-width: 576px) { 
+		font-size: 27px;
+		@media (max-width: 768px) { 
 				margin-top: 15px;
+				margin-bottom: 15px;
+				font-size: 20px;
 				}
-		font-size: 28px;
 		background-color: rgba(247, 255, 253);
 	}	
 `;
@@ -111,6 +124,11 @@ class RestaurantPage extends React.Component {
 						<Card.Header className='restaurant-name'>
 							{this.props.restaurant.name}
 						</Card.Header>
+						<Card.Header className='restaurant-address'>
+							{this.props.restaurant.address}
+						</Card.Header>
+
+
 					</Card>{' '}
 					{/* move side nav here if you can't get them to go side by side*/}
 						{this.state.posts.map((post, index) => {
