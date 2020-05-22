@@ -38,7 +38,7 @@ class App extends React.Component {
 			restaurant.city.split(' ').join('').includes(event.target.name)
 		);
 		this.setState({ cityRestaurants: filteredRestaurants });
-		console.log(event.target.name);
+		
 	};
 
 	handleViewClick = (event) => {
@@ -74,7 +74,7 @@ class App extends React.Component {
 								exact
 								path='/restaurant/:name'
 								render={(routerProps) => {
-									console.log(this.state.cityRestaurants);
+									
 									return (
 										<RestaurantPage
 											routerProps={routerProps}
@@ -96,7 +96,7 @@ class App extends React.Component {
 									if (!this.state.restaurants || !this.state.cityRestaurants) {
 										return null;
 									}
-									console.log(this.state.cityRestaurants);
+									
 									return (
 										<CityRes
 											cityRestaurants={this.state.cityRestaurants}

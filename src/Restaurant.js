@@ -61,16 +61,19 @@ class RestaurantPage extends React.Component {
 		axios.get(`${url}/${this.props.restaurant._id}`).then((res) => {
 			const allPosts = res.data;
 			this.setState({ posts: allPosts });
-			console.log(allPosts);
 		});
 	}
 
 	componentDidUpdate() {
+		
 		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
-		axios.get(`${url}/${this.props.restaurant._id}`).then((res) => {
+		if(this.state.redirect === true ) {
+			axios.get(`${url}/${this.props.restaurant._id}`).then((res) => {
 			const allPosts = res.data;
 			this.setState({ posts: allPosts, redirect: false });
 		});
+		}
+		
 	}
 
 	handleShow = () => {
@@ -86,30 +89,30 @@ class RestaurantPage extends React.Component {
 		axios
 			.post(`${url}/${this.props.restaurant._id}`, { ...data })
 			.then((res) => {
-				console.log(res);
+			
 				this.handleRedirect();
 			});
-		// this.props.history.push(`/restaurant/${this.props.restaurant.name}`);
+	
 	};
 
 	handleEditClick = (event, data) => {
 		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
 		axios.put(`${url}/${event.target.id}`, { ...data }).then((res) => {
-			console.log(res);
+		
 			this.handleRedirect();
 		});
 		this.setState({ show: false });
-		// this.props.history.push(`/restaurant/${this.props.restaurant.name}`);
+	
 	};
 
 	handleDeleteClick = (event) => {
 		const url = 'https://afternoon-woodland-50465.herokuapp.com/api/post';
 		axios.delete(`${url}/${event.target.id}`).then((res) => {
-			console.log(res);
+		
 			this.handleRedirect();
 		});
 		this.setState({ show: false });
-		// this.props.history.push(`/restaurant/${this.props.restaurant.name}`);
+	
 	};
 
 	render() {
@@ -127,11 +130,11 @@ class RestaurantPage extends React.Component {
 							{this.props.restaurant.address}
 						</Card.Header>
 					</Card>{' '}
-					{/* move side nav here if you can't get them to go side by side*/}
 					<div className='content' >
 						{this.state.posts.map((post, index) => {
 							return (
 								<AllPosts
+									key={post._id}
 									post={post}
 									restaurant={this.props.restaurant}
 									show={this.state.show}
