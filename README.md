@@ -1,5 +1,5 @@
 # Project-3-FoodChat 
-Deployed Frontend: https://food-chat323.herokuapp.com/
+Deployed FrontEnd: [Food Chat](https://food-chat323.herokuapp.com/)
 
 ### Description 
 FoodChat is a fully responsive application that allows users to create posts on the best or worst dish at the top 10 restaurants in Los Angeles, New York, and Austin. Users are able to post a dish, their  description of that dish, and whether or not they would revisit the restaurant. FoodChat also allows users to delete and edit posts. 
